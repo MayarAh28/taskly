@@ -26,7 +26,7 @@ export default function ControllerComponent({
       control={form.control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid} className="gap-1">
-          <FieldLabel className="text-[#434654] uppercase font-bold text-[11px] leading-4 pl-1 tracking-widest">
+          <FieldLabel className="pl-1 label-sm">
             {label}
           </FieldLabel>
           <Input
@@ -34,7 +34,7 @@ export default function ControllerComponent({
             placeholder={placeholder}
             aria-invalid={fieldState.invalid}
             type={type}
-            className="bg-input-bg shadow-none py-[18px] px-4 h-[56px] w-[342px] placeholder:text-[#737685]"
+            className="bg-surface-highest shadow-none py-[18px] px-4 h-[56px] w-[342px] border-none focus-visible:ring-primary-container focus-visible:ring-1 aria-invalid:bg-invalid-input "
           />
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
         </Field>

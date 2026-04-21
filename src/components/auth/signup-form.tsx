@@ -15,10 +15,11 @@ import {
 } from "../ui/card";
 import { FieldGroup } from "../ui/field";
 import { Button } from "../ui/button";
+import { Spinner } from "../ui/spinner";
+import ControllerComponent from "../ui/controller";
+import { PasswordChecklist } from "@/app/(auth)/signup/PasswordChecklist";
 import { toast } from "sonner";
 import Link from "next/link";
-import ControllerComponent from "../ui/controller";
-import { Spinner } from "../ui/spinner";
 
 export function SignUpForm() {
   const router = useRouter();
@@ -36,7 +37,7 @@ export function SignUpForm() {
   });
 
   const { isSubmitting } = form.formState;
-
+  const currentPassword = form.watch("password");
   async function onSubmit(values: SignUpInput) {
     try {
       const { error } = await supabase.auth.signUp({
@@ -52,7 +53,7 @@ export function SignUpForm() {
 
       if (error) throw error;
 
-      toast.success("Account created! Check your email for verification.");
+      toast.success("Account created! Thank you for joining Taskly.");
       router.push("/");
     } catch (error: any) {
       toast.error("Registration failed", {
@@ -62,23 +63,28 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="px-6 pb-20 gap-0 border-none shadow-none md:border md:shadow-sm">
-      <CardHeader className="pt-8 pb-10 px-0">
-        <CardTitle className="font-semibold text-2xl leading-10 text-foreground">
+    <Card className="px-6 pb-20 gap-0 ring-0 bg-background md:w-[576px] mx-auto md:bg-white md:p-12 md:shadow-md md:rounded-2xl">
+      <CardHeader className="pt-8 pb-10 px-0 md:pt-0 md:pb-10 md:text-center">
+        <CardTitle className="font-semibold text-2xl leading-10 text-foreground md:text-3xl">
           Create your workspace
         </CardTitle>
-        <CardDescription className="font-normal text-sm text-muted-foreground">
-          Join the curated environment for institutional trust and task
-          precision.
+        <CardDescription className=" body-md">
+          <p className="md:hidden">
+            Join the curated environment for institutional trust and task
+            precision.
+          </p>
+          <p className="hidden md:block">
+            Join the editorial approach to task management
+          </p>
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="p-0">
+      <CardContent className="p-0 ">
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 md:pb-4"
         >
-          <FieldGroup>
+          <FieldGroup >
             <ControllerComponent
               type="text"
               form={form}
@@ -100,6 +106,7 @@ export function SignUpForm() {
               label="Job Title"
               placeholder="e.g. Project Manager"
             />
+            <div className="flex flex-col gap-6 md:flex-row md:gap-4">
             <ControllerComponent
               type="password"
               form={form}
@@ -114,16 +121,12 @@ export function SignUpForm() {
               label="Confirm Password"
               placeholder="Repeat your password"
             />
-          </FieldGroup>
-
-         
+            </div>
+            <PasswordChecklist passwordValue={currentPassword} />
           <Button
             type="submit"
             disabled={isSubmitting}
             className="w-full h-14 rounded-lg font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-60"
-            style={{
-              background: "linear-gradient(135deg, #003D9B, #0052CC)",
-            }}
           >
             {isSubmitting ? (
               <span className="flex items-center gap-2">
@@ -133,10 +136,12 @@ export function SignUpForm() {
               "Create Account"
             )}
           </Button>
+          </FieldGroup>
+
         </form>
       </CardContent>
 
-      <CardFooter className="px-0 pt-10 pb-8 flex justify-center">
+      <CardFooter className="px-0 pt-10 pb-8 flex justify-center md:pb-0 md:pt-8">
         <p className="text-sm text-muted-foreground">
           Already have an account?{" "}
           <Link

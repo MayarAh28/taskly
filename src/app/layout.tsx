@@ -22,7 +22,7 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", "font-sans", inter.variable)}
     >
-      <body className="flex flex-col">
+      <body className="flex flex-col justify-between">
         <Header />
         <main className="grow">{children}</main>
         <Toaster position="top-right" richColors />
