@@ -35,10 +35,20 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-surface-highest: var(--surface-highest);
+  --color-surface-low: var(--surface-low);
+  --color-slate-900: var(--slate-900);
+  --color-slate-600: var(--slate-600);
+  --color-slate-300: var(--slate-300);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-invalid-input: var(--invalid-input);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -46,43 +56,52 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --background-image-signature-gradient: linear-gradient(135deg, oklch(0.45 0.25 265) 0%, oklch(0.55 0.22 260) 100%);
-  --color-slate-custom: oklch(0.45 0.05 250);
 }
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.9838 0.0079 286.25); /* #f9f9ff */
   --foreground: oklch(0.145 0 0);
-  --card: oklch(0.99 0.005 250);
+  --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.45 0.25 265);
+  --primary: oklch(0.3929 0.1634 260.35); /* #003d9b */
+  --primary-container: oklch(0.4802 0.2012 260.48); /*#0052cc*/
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
+  --surface-highest: oklch(0.9135 0.0414 269.06); /* #d7e2ff */
+  --surface-low: oklch(0.9661 0.0162 278.51); /* #f1f3ff */
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.96 0.01 250);
-  --muted-foreground: oklch(0.45 0.05 250);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.01 250);
-  --input: oklch(0.92 0.01 250);
-  --ring: oklch(0.45 0.25 265 / 0.5);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --radius: 0.5rem;
+  --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.45 0.25 265);
+  --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.92 0.01 250);
+  --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --slate-900: oklch(0.2265 0.0702 257.43); /* #041b3c */
+  --slate-800: oklch(0.3969 0.0239 275.73); /*#434654 */
+  --slate-600: oklch(0.4834 0.0495 261.46); /*#4f5f7b */
+  --slate-300: oklch(0.8291 0.0225 277.42); /* #c3c6d6*/
+  --success: oklch(0.8969 0.1371 160.24); /* #82f9be*/
+  --error: oklch(0.506 0.1927 27.7); /* #ba1a1a*/
+  --warning: oklch(0.8179 0.1705 77.95); /* #ffb300*/
+  --invalid-input: oklch(0.9183 0.041771 25.2259);
 }
 
 .dark {
@@ -132,12 +151,27 @@
 }
 
 @layer components {
-  .taskly-card {
-    @apply bg-card border-border rounded-[var(--radius)] shadow-sm transition-all hover:shadow-md;
+  .btn-gradient {
+    @apply bg-[linear-gradient(90deg,var(--color-primary),var(--color-primary-container))];
   }
 
-  .btn-gradient {
-    background-image: var(--background-image-signature-gradient);
-    @apply text-white shadow-lg hover:opacity-90 transition-opacity;
+  .display-lg {
+    @apply font-bold text-[3.5rem] leading-[3.5rem] tracking-[-0.175rem];
+  }
+
+  .headline-lg {
+    @apply font-semibold text-[2rem] leading-[2.5rem] tracking-normal;
+  }
+
+  .title-md {
+    @apply font-medium text-[1.125rem] leading-[1.75rem] tracking-normal;
+  }
+
+  .body-md {
+    @apply font-normal text-[0.875rem] leading-[1.421875rem] tracking-normal;
+  }
+
+  .label-sm {
+    @apply font-bold text-[0.6875rem] leading-[1.03125rem] tracking-[0.06875rem] uppercase text-slate-600;
   }
 }
