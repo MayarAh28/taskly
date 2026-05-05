@@ -26,7 +26,7 @@ export default function ControllerComponent({
       control={form.control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid} className="gap-1">
-          <FieldLabel className="pl-1 label-sm">
+          <FieldLabel className="pl-1 label-sm text-slate-800">
             {label}
           </FieldLabel>
           <Input
