@@ -1,5 +1,14 @@
 import { z } from 'zod';
 
+export const PASSWORD_SPECIAL_CHAR_REGEX = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+const UPPERCASE_REGEX = /[A-Z]/;
+const LOWERCASE_REGEX = /[a-z]/;
+const DIGIT_REGEX = /[0-9]/;
+
+export const hasUppercase = (value: string) => UPPERCASE_REGEX.test(value);
+export const hasLowercase = (value: string) => LOWERCASE_REGEX.test(value);
+export const hasDigit = (value: string) => DIGIT_REGEX.test(value);
+
 export const signUpSchema = z
   .object({
     name: z
@@ -17,15 +26,12 @@ export const signUpSchema = z
       .min(8, 'Password must be at least 8 characters')
       .max(64, 'Password cannot exceed 64 characters')
       .regex(/^\S*$/, 'Password cannot contain whitespace')
-      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-      .regex(/[0-9]/, 'Password must contain at least one digit')
-      .regex(
-        /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
-        'Password must contain at least one special character'
-      ),
+      .regex(UPPERCASE_REGEX, 'Password must contain at least one uppercase letter')
+      .regex(LOWERCASE_REGEX, 'Password must contain at least one lowercase letter')
+      .regex(DIGIT_REGEX, 'Password must contain at least one digit')
+      .regex(PASSWORD_SPECIAL_CHAR_REGEX, 'Password must contain at least one special character'),
     confirmPassword: z.string(),
-    jobTitle: z.string().optional(),
+    job_title: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: 'Passwords do not match',
