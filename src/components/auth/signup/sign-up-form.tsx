@@ -3,10 +3,10 @@
 import { SignUpFormData, signUpSchema } from '@/lib/validation/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '../ui/field';
-import { Input } from '../ui/input';
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '../../ui/field';
+import { Input } from '../../ui/input';
 import { useState } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import toast from 'react-hot-toast';
