@@ -9,6 +9,10 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/80',
+        gradient:
+          'bg-gradient-to-br from-[#003D9B] to-[#0052CC] text-white shadow-[0px_1px_2px_rgba(0,0,0,0.05)] hover:opacity-95 disabled:opacity-60',
+        'text-cta':
+          'bg-transparent text-[#003D9B] hover:bg-[#003D9B]/5 disabled:text-[#4F5F7B] disabled:font-medium disabled:opacity-60',
         outline:
           'border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50',
         secondary:
@@ -31,6 +35,7 @@ const buttonVariants = cva(
         'icon-sm':
           'size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg',
         'icon-lg': 'size-9',
+        cta: 'h-10 gap-1.5 rounded-sm px-6 py-2.5 text-sm font-semibold',
       },
     },
     defaultVariants: {
