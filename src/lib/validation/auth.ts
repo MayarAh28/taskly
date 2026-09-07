@@ -48,6 +48,24 @@ export const forgotPasswordSchema = z.object({
   email: z.string().trim().email({ message: 'Invalid email address' }),
 });
 
+export const updatePasswordSchema = z.object({
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .max(64, 'Password cannot exceed 64 characters')
+    .regex(/^\S*$/, 'Password cannot contain whitespace')
+    .regex(UPPERCASE_REGEX, 'Password must contain at least one uppercase letter')
+    .regex(LOWERCASE_REGEX, 'Password must contain at least one lowercase letter')
+    .regex(DIGIT_REGEX, 'Password must contain at least one digit')
+    .regex(PASSWORD_SPECIAL_CHAR_REGEX, 'Password must contain at least one special character'),
+  confirmPassword: z.string(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: 'Passwords do not match',
+  path: ['confirmPassword'],
+});
+
+
 export type SignUpFormData = z.infer<typeof signUpSchema>;
 export type LoginFormData = z.infer<typeof loginSchema>;
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
+export type UpdatePasswordFormData = z.infer<typeof updatePasswordSchema>;

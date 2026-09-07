@@ -12,7 +12,7 @@ import { createClient } from '@/lib/supabase/client';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import PasswordRequirements from './PasswordRequirements';
+import PasswordRequirements from '../PasswordRequirements';
 
 export function SignUpForm() {
   const router = useRouter();
